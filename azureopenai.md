@@ -33,7 +33,7 @@ az cognitiveservices account keys list \
 
 
 ### Launch VS code by using the command line
-```
+```bash
 code
 ```
 
@@ -46,7 +46,7 @@ AZURE_OPENAI_API_KEY="<primary‑key>"
 ```
 
 
-```
+```bash
 
 # ✧ Deploy the GPT‑4o mini model ✧
 az cognitiveservices account deployment create \
