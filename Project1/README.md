@@ -33,6 +33,7 @@ TelcoGPT simplifies this with a **prompt-engineered assistant** preloaded with t
 
 
 <img src="../figures/project11.png" alt="Description of Project 1" width="900"/>
+<img src="../figures/project12.png" alt="Description of Project 1" width="1200"/>
 ---
 
 ## 🏗️ Architecture Overview
