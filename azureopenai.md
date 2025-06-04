@@ -13,19 +13,19 @@ az login                       # interactive browser auth
 az cognitiveservices account create \
     --name <myResourceName> \
     --resource-group Tredence-B3 \
-    --location eastus \
+    --location eastus2 \
     --kind OpenAI \
     --sku s0
 
 # ✧ Fetch the endpoint URL ✧
 az cognitiveservices account show \
-    --name <myResourceName> \
+    --name anshuopenai2b3 \
     --resource-group Tredence-B3 \
   | jq -r .properties.endpoint
 
 # ✧ Fetch the primary key ✧
 az cognitiveservices account keys list \
-    --name <myResourceName> \
+    --name anshuopenai2b3 \
     --resource-group Tredence-B3 \
   | jq -r .key1
 
@@ -42,7 +42,7 @@ code
 ```
 AZURE_OPENAI_ENDPOINT="https://<myResourceName>.openai.azure.com/"
 AZURE_OPENAI_API_KEY="<primary‑key>"
-
+OPENAI_API_VERSION=2024-12-01-preview
 ```
 
 
@@ -50,13 +50,13 @@ AZURE_OPENAI_API_KEY="<primary‑key>"
 
 # ✧ Deploy the GPT‑4o mini model ✧
 az cognitiveservices account deployment create \
-    --name <myResourceName> \
+    --name anshuopenai2b3 \
     --resource-group Tredence-B3 \
     --deployment-name myllm \
     --model-name gpt-4o-mini \
     --model-version "2024-07-18" \
     --model-format OpenAI \
-    --sku-capacity 1 \
+    --sku-capacity 2 \
     --sku-name Standard
 ```
 
@@ -67,3 +67,6 @@ az cognitiveservices account deployment create \
 > * **Azure CLI vs PowerShell:** The above commands run in Bash or PowerShell Core. Ensure `jq` is installed for JSON parsing.
 
 ---
+
+git fetch --all
+git reset --hard origin/main
