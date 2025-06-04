@@ -42,7 +42,7 @@ Return exactly five bullets:
 5. Standards
 """
 
-def dete_card_type(q:str)->str:
+def detect_card_type(q:str)->str:
     if _RGX_DEF.search(q): return CARD_DEF
     if _RGX_TRB.search(q): return CARD_TRB
     return CARD_DES

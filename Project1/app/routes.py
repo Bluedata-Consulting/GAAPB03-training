@@ -1,16 +1,19 @@
 from flask import Blueprint, request, jsonify, render_template
 from openai import AzureOpenAI, APIError, RateLimitError
-import os, redis, json, logging, time
-from .cards import dete_card_type
+import  logging
+from .cards import detect_card_type
 from .prompt_builder import build_prompt
 from .validator import validate_reply
+
 bp = Blueprint("api",__name__)
+
 #rdb = redis.from_url(os.getenv("REDIS_URL","redis://localhost:6379"))
 
-client = AzureOpenAI(api_version="2024-12-01-preview",timeout=20)
+client = AzureOpenAI(timeout=20)
 
 # Azure AI Foundry deployment name
-model = "telcogpt2"
+model = "myllm"
+
 ## Logging setup
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -24,10 +27,10 @@ if not logger.handlers:
 def chat():
     msg = request.get_json(force=True)['message']
     if not msg.strip():
-        return jsonify({"Error":"empty message"}),4000000000
+        return jsonify({"Error":"empty message"}),400
     
     hist = []  #rdb.lrange("chat",0,-1)
-    card = dete_card_type(msg.lower().strip())
+    card = detect_card_type(msg.lower().strip())
     prompt = build_prompt(card, hist, msg)
 
     try:
