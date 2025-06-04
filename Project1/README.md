@@ -59,14 +59,16 @@ TelcoGPT simplifies this with a **prompt-engineered assistant** preloaded with t
 
 ```bash
 # Resource configuration
-RG="Tredence-Batch2"                  # Resource Group
-LOCATION="centralindia"              # Azure Region
+RG="Tredence-B3"                  # Resource Group
+LOCATION="eastus2"              # Azure Region
 ACR="telcogptacr"                    # Azure Container Registry Name
 IMG="telcogpt:v1"                    # Image Name
 ACI="telcogpt-aci"                   # Azure Container Instance
 PORT=8080                            # App Port
-AOAI_ENDPOINT="https://<openai-resource>.openai.azure.com/"
-AOAI_KEY="<your-openai-api-key>"
+
+AZURE_OPENAI_ENDPOINT="https://swedencentral.api.cognitive.microsoft.com/"
+AZURE_OPENAI_API_KEY="xxxxxxxxxxxxxxxxxxxxxxx"
+OPENAI_API_VERSION="2024-12-01-preview"
 ```
 
 ---
@@ -138,12 +140,23 @@ curl -s http://127.0.0.1:5000/chat \
 ```bash
 # Build the Docker image
 sudo docker build -t $IMG .
+# to check current docker images
+sudo docker images -a
+
+# to check current docker containers
+sudo docker ps -a 
 
 # Run locally
 sudo docker run -d -p 8080:8080 \
-  -e AZURE_OPENAI_ENDPOINT=$AOAI_ENDPOINT \
-  -e AZURE_OPENAI_API_KEY=$AOAI_KEY \
+  -e AZURE_OPENAI_ENDPOINT=$AZURE_OPENAI_ENDPOINT \
+  -e AZURE_OPENAI_API_KEY=$AZURE_OPENAI_API_KEY \
+  -e OPENAI_API_VERSION=$OPENAI_API_VERSION \
   $IMG
+
+# to check docker contianers
+sudo docker ps -a
+
+
 ```
 
 ---
