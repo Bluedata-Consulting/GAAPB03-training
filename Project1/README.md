@@ -61,9 +61,9 @@ TelcoGPT simplifies this with a **prompt-engineered assistant** preloaded with t
 # Resource configuration
 RG="Tredence-B3"                  # Resource Group
 LOCATION="eastus2"              # Azure Region
-ACR="telcogptacr"                    # Azure Container Registry Name
+ACR="telcogptacranshu"                    # Azure Container Registry Name
 IMG="telcogpt:v1"                    # Image Name
-ACI="telcogpt-aci"                   # Azure Container Instance
+ACI="telcogpt-aci-anshu"                   # Azure Container Instance
 PORT=8080                            # App Port
 
 AZURE_OPENAI_ENDPOINT="https://swedencentral.api.cognitive.microsoft.com/"
@@ -156,7 +156,8 @@ sudo docker run -d -p 8080:8080 \
 # to check docker contianers
 sudo docker ps -a
 
-
+# to check container logs
+sudo docker logs <contianerID>
 ```
 
 ---
@@ -164,9 +165,16 @@ sudo docker ps -a
 ## 🚀 Step 4 – Push to Azure Container Registry (ACR)
 
 ```bash
+# create a new Container REgistry
 az acr create -g $RG -n $ACR --sku Basic --admin-enabled true
-az acr login -n $ACR
+
+# login to the container registry
+sudo az acr login -n $ACR -u $(az acr credential show -n $ACR --query username -o tsv) \
+-p $(az acr credential show -n $ACR --query passwords[0].value -o tsv)
+
+# push the local docker image to the container registry
 sudo docker tag $IMG $ACR.azurecr.io/$IMG
+
 sudo docker push $ACR.azurecr.io/$IMG
 ```
 
@@ -183,8 +191,13 @@ az container create -g $RG -n $ACI \
   --cpu 1 --memory 1 --ports $PORT --os-type Linux --ip-address public \
   --dns-name-label telcogpt-demo \
   --environment-variables \
-    AZURE_OPENAI_ENDPOINT=$AOAI_ENDPOINT \
-    AZURE_OPENAI_API_KEY=$AOAI_KEY
+  AZURE_OPENAI_ENDPOINT=$AZURE_OPENAI_ENDPOINT \
+  AZURE_OPENAI_API_KEY=$AZURE_OPENAI_API_KEY \
+  OPENAI_API_VERSION=$OPENAI_API_VERSION 
+  
+# check list of containers on ACI
+az container list -g $RG -o table
+
 ```
 
 ---
