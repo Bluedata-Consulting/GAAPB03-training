@@ -32,11 +32,13 @@ def chat():
     hist = []  #rdb.lrange("chat",0,-1)
     card = detect_card_type(msg.lower().strip())
     prompt = build_prompt(card, hist, msg)
+    hist.append({"role":"user","content":msg})
 
     try:
         response = client.chat.completions.create(messages=prompt,
                                               model=model, temperature=0.2)
         assistant_res = response.choices[0].message.content
+
 
         if not validate_reply(assistant_res):
             logger.warning("format validation failed - sending corrective message")
@@ -44,11 +46,11 @@ def chat():
 
             assistant_res = client.chat.completions.create(model=model,messages=prompt).choices[0].message.content
         
+        hist.append({"role":"assistant","content":assistant_res})
         return jsonify({"answer":assistant_res})
     except (RateLimitError, APIError) as err:
         logger.error("OpenAI Call failed %s",err)
         return jsonify({"error":"upstream failure"}),502
-
 
 @bp.route("/")
 def mainUI():return render_template("chat.html")
