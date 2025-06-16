@@ -2,3 +2,4 @@ AZURE_OPENAI_ENDPOINT=https://xxxxxxxxxxxxx.api.cognitive.microsoft.com/
 AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxx
 OPENAI_API_VERSION=2024-12-01-preview
 OPENWEATHERMAP_API_KEY=6a8b0ac166a37e2b7a38e64416b3c3fe
+TAVILY_API_KEY=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
