@@ -58,7 +58,7 @@ Export the standard variables:
 
 ```bash
 export NAME=anshu
-export RG=Tredence-Batch2
+export RG=TredenceB3
 export VAULT=vault$NAME
 export VAULT_NAME=$VAULT
 export SP=sp$NAME
@@ -67,9 +67,10 @@ export ACI=aci$NAME
 export IMG=img$NAME
 
 # Your Azure/OpenAI/Langfuse creds
-export AOAIKEY=xxxxxxxxxxxxxxxxxxxxx
-export LFPUBLIC=xxxxxxxxxxxxxxxxxxxxx
-export LFSECRET=xxxxxxxxxxxxxxxxxxxxxxxxxx
+export AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxx
+export OPENAI_API_VERSION=2024-12-01-preview
+export LANGFUSE_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxxx
+export LANGFUSE_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxx
 export AZURE_DEPLOYMENT=telcogpt2
 export LANGFUSE_HOST=https://cloud.langfuse.com
 export AZURE_OPENAI_ENDPOINT=https://swedencentral.api.cognitive.microsoft.com/
