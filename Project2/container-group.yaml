@@ -21,25 +21,25 @@ properties:
       - name: BACKEND_URL
         value: http://localhost:8000
       - name: VAULT_NAME
-        value: vaultanshu
+        value: vault2anshu
       - name: AZURE_CLIENT_SECRET
-        value: Qo08Q~6oJCTHJkBkrA2gSQZr8YlznTnVk26tncv.
+        value: y7V8Q~tbhSFhtvZ1GcXaf6McETQKMaGCwRVoFaLJ
       - name: AZURE_CLIENT_ID
-        value: cc8f42c4-5f99-417b-b833-3bc39649cf4a
+        value: c34c4559-fcfe-4fb9-ae39-60901d08119c
       - name: AZURE_TENANT_ID
         value: 0d2a6053-e113-42e7-9169-f5cbed7a941f
       - name: AZURE_DEPLOYMENT
-        value: telcogpt2
+        value: myllm
       - name: LANGFUSE_HOST
-        value: https://cloud.langfuse.com
+        value: https://us.cloud.langfuse.com
       - name: AZURE_OPENAI_ENDPOINT
         value: https://swedencentral.api.cognitive.microsoft.com/
       - name: SESSION_SECRET
-        value: AS0D4sidjUhCX+yw9PyGTbSiQqF59Fcgc9wa85axW/k=
+        value: rmAx9kE9GRiyWu5A+XaXF7cqYl3bED+2LtttSCdiT1s=
       - name: RUNNING_IN_AZURE
         value: 'True'
       - name: ALLOWED_ORIGINS
-        value: http://codeopt-app.centralindia.azurecontainer.io,http://localhost
+        value: http://codeopt-app..azurecontainer.io,http://localhost
       image: codeacranshu.azurecr.io/imganshu-backend:latest
       ports:
       - port: 8000
@@ -48,7 +48,7 @@ properties:
           cpu: 1.0
           memoryInGB: 2.0
   imageRegistryCredentials:
-  - password: OvVtl/RyTJ/g32yCmAxv4vPKv+ViuVcgafkYaMi8DH+ACRCCttSz
+  - password: qFrb7rG/lbvx9OC82pscOVi4fjkgZKU1watlTHminK+ACRCT4EbN
     server: codeacranshu.azurecr.io
     username: codeacranshu
   ipAddress:

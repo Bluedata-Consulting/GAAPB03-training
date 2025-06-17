@@ -156,9 +156,9 @@ az ad sp create-for-rbac -n my$SP \
 appid is client id, password is clientsecret
 
 ```bash
-export AZURE_CLIENT_ID=xxxxxxxxxxxxxxxxx
-export AZURE_CLIENT_SECRET=axxxxxxxxxxxxxxxxxxxxxxx
-export AZURE_TENANT_ID=0d2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export AZURE_CLIENT_ID=xxx-xxxx-4fb9-ae39-xxxxxxxxxxxxx
+export AZURE_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxx
+export AZURE_TENANT_ID=xxxx-xx-42e7-9169-xxxxx
 ```
 
 ### 4. Create & Login to Azure Container Registry
@@ -230,6 +230,7 @@ az acr update -n $ACR --admin-enabled true
 
 ```bash
 # build
+cd ..
 sudo docker build -f backend.Dockerfile -t $IMG-backend:latest .
 
 # run
@@ -322,6 +323,9 @@ sudo docker rm $(sudo docker ps -aq)
    export DNS_LABEL=codeopt-app
    export LOCATION=$REGION
    export ALLOWED_ORIGINS=http://$DNS_LABEL.$LOCALTION.azurecontainer.io,http://localhost
+
+
+
    python generate-aci-config.py
    ```
 2. **Deploy** both containers in one group:

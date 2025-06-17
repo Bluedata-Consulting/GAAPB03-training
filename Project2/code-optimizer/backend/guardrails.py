@@ -42,7 +42,7 @@ class _OutputGuardrailResp(BaseModel):
 
 def output_guardrail(optimized_code: str, human_feedback_list: List[str]) -> bool:
     p = _prompt("output-guardrail")
-    print(optimized_code)
+    #print(optimized_code)
     parser = JsonOutputParser(pydantic_object=_OutputGuardrailResp)
 
     chain = (
