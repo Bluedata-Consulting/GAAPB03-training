@@ -1,5 +1,9 @@
 # Code Optimization Assistant
 
+<img src="../figures/project21.png" alt="Description of Project 1" width="900"/>
+<img src="../figures/project22.png" alt="Description of Project 1" width="1200"/>
+
+
 ## 📝 Overview
 
 A two-tier app:
@@ -58,8 +62,8 @@ Export the standard variables:
 
 ```bash
 export NAME=anshu
-export RG=TredenceB3
-export VAULT=vault$NAME
+export RG=Tredence-B3
+export VAULT=vault2$NAME
 export VAULT_NAME=$VAULT
 export SP=sp$NAME
 export ACR=codeacr$NAME
@@ -71,7 +75,7 @@ export AZURE_OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxx
 export OPENAI_API_VERSION=2024-12-01-preview
 export LANGFUSE_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxxx
 export LANGFUSE_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxx
-export AZURE_DEPLOYMENT=telcogpt2
+export AZURE_DEPLOYMENT=myllm
 export LANGFUSE_HOST=https://cloud.langfuse.com
 export AZURE_OPENAI_ENDPOINT=https://swedencentral.api.cognitive.microsoft.com/
 export REGION=centralindia
@@ -100,26 +104,26 @@ az keyvault create -g $RG -n $VAULT --enable-rbac-authorization true
 ### 2. Add Secrets to Key Vault
 
 ```bash
-az keyvault secret set --vault-name $VAULT -n LANGFUSE-PUBLIC-KEY  --value $LFPUBLIC  
-az keyvault secret set --vault-name $VAULT -n LANGFUSE-SECRET-KEY  --value $LFSECRET  
-az keyvault secret set --vault-name $VAULT -n AZURE-OPENAI-API-KEY --value $AOAIKEY  
+az keyvault secret set --vault-name $VAULT -n LANGFUSE-PUBLIC-KEY  --value $LANGFUSE_PUBLIC_KEY  
+az keyvault secret set --vault-name $VAULT -n LANGFUSE-SECRET-KEY  --value $LANGFUSE_SECRET_KEY  
+az keyvault secret set --vault-name $VAULT -n AZURE-OPENAI-API-KEY --value $AZURE_OPENAI_API_KEY  
 ```
 
 ### 3. Create Service Principal for Key Vault Access
 
 ```bash
-az ad sp create-for-rbac -n $SP \
+az ad sp create-for-rbac -n my$SP \
   --role "Key Vault Secrets User" \
-  --scopes $(az keyvault show -n $VAULT --query id -o tsv) \
-  --sdk-auth > sp.json
+  --scopes $(az keyvault show -n $VAULT --query id -o tsv) 
 ```
 
 *Extract `clientId`, `clientSecret`, `tenantId` from `sp.json` into env vars:*
+appid is client id, password is clientsecret
 
 ```bash
-export AZURE_CLIENT_ID=xxxxxxxxxxxxx
-export AZURE_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxx
-export AZURE_TENANT_ID=xxxxxxxxxxxxxxxxxxxxx
+export AZURE_CLIENT_ID=xxxxxxxxxxxxxxxxx
+export AZURE_CLIENT_SECRET=axxxxxxxxxxxxxxxxxxxxxxx
+export AZURE_TENANT_ID=0d2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ### 4. Create & Login to Azure Container Registry
@@ -128,8 +132,6 @@ export AZURE_TENANT_ID=xxxxxxxxxxxxxxxxxxxxx
 az acr create -g $RG -n $ACR --sku Basic  
 az acr update -n $ACR --admin-enabled true  
 
-# login to ACR
-az acr login -n $ACR
 ```
 
 ---
@@ -139,6 +141,7 @@ az acr login -n $ACR
 1. **Go** into the backend folder:
 
    ```bash
+   cd Project2
    cd code-optimizer/backend
    ```
 2. **Run** the FastAPI server:
