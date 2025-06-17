@@ -1,7 +1,42 @@
 # Code Optimization Assistant
 
+## 📘 Project Summary
+
+### 📝 Description
+
+**Code Optimization Assistant** is a cloud-native, AI-powered tool designed to iteratively refactor and optimize code from GitHub repositories. It integrates Git-based workflows, LangChain pipelines, and Azure OpenAI to deliver contextual, explainable code improvements—facilitated via an intuitive web interface. The tool empowers developers to boost productivity through automated feedback loops and real-time optimization, supported by advanced logging and observability.
+
+---
+
+### ❗ Problem Statement
+
+Modern software teams often face challenges in maintaining clean, efficient code across repositories. Manual code reviews are time-consuming, subjective, and inconsistently applied—especially in fast-paced agile environments. Without automated tooling, teams struggle with:
+
+* High technical debt from unoptimized legacy code.
+* Slow feedback cycles for refactoring.
+* Lack of guardrails around AI-generated code outputs.
+* Fragmented observability and traceability.
+
+
+---
 <img src="../figures/project21.png" alt="Description of Project 1" width="900"/>
 <img src="../figures/project22.png" alt="Description of Project 1" width="1200"/>
+
+
+### 💡 Solution Approach
+
+**Code Optimization Assistant** combines a secure backend (FastAPI, Python 3.11) with a modern frontend (React + Vite) deployed over Azure infrastructure. The architecture supports seamless GitHub repo cloning, real-time code analysis, and iterative improvement workflows. Key components:
+
+* 🔐 **Session Management & Auth**: Stateless, cookie-based sessions.
+* 📂 **Repo Handler**: Uses Git CLI & `pathlib` to clone and parse repo content.
+* 🔄 **LangChain Pipeline**: Implements `input_guardrail → optimizer → output_guardrail` to ensure safe, high-quality LLM outputs.
+* 🤖 **LLM Backend**: Integrates with Azure OpenAI (GPT-4o) for code generation and optimization based on user edits and feedback.
+* 🧠 **Observability**: Powered by Langfuse for prompt-level tracing, with Python logging and optional Prometheus integration.
+* 🐳 **Containerized Deployment**: Fully dockerized and deployable via Azure Container Registry & Container Instances.
+* 📦 **CI/CD Ready**: Supports local development, containerized builds, and Azure Cloud deployment pipelines.
+
+This modular design ensures a scalable, secure, and explainable workflow for developers to automate code review, refactoring, and optimization tasks.
+
 
 
 ## 📝 Overview
