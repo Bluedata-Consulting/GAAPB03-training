@@ -18,7 +18,7 @@ from a2a.utils import (
 )
 from a2a.utils.errors import ServerError
 
-from app.agent import CurrencyAgent
+from agent import CurrencyAgent
 
 
 logging.basicConfig(level=logging.INFO)

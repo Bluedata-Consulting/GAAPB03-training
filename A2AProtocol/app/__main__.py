@@ -16,8 +16,8 @@ from a2a.types import (
 )
 from dotenv import load_dotenv
 
-from app.agent import CurrencyAgent
-from app.agent_executor import CurrencyAgentExecutor
+from agent import CurrencyAgent
+from agent_executor import CurrencyAgentExecutor
 
 
 load_dotenv()
@@ -36,10 +36,10 @@ class MissingAPIKeyError(Exception):
 def main(host, port):
     """Starts the Currency Agent server."""
     try:
-        if os.getenv('model_source',"google") == "google":
-           if not os.getenv('GOOGLE_API_KEY'):
+        if os.getenv('model_source',"azure") == "azure":
+           if not os.getenv('AZURE_OPENAI_API_KEY'):
                raise MissingAPIKeyError(
-                   'GOOGLE_API_KEY environment variable not set.'
+                   'AZURE_OPENAI_API_KEY environment variable not set.'
                )
         else:
             

@@ -6,7 +6,7 @@ import os
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.tools import tool
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import AzureChatOpenAI
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.prebuilt import create_react_agent
@@ -73,9 +73,9 @@ class CurrencyAgent:
     )
 
     def __init__(self):
-        model_source = os.getenv("model_source", "google")
-        if model_source == "google":
-            self.model = ChatGoogleGenerativeAI(model='gemini-2.0-flash')
+        model_source = os.getenv("model_source", "azure")
+        if model_source == "azure":
+            self.model = AzureChatOpenAI(model='myllm')
         else:
             self.model = ChatOpenAI(
                  model=os.getenv("TOOL_LLM_NAME"),
