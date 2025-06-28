@@ -2,3 +2,4 @@ gen-ai
 .env
 Project2/code-optimizer/frontend/node_modules
 Project2/code-optimizer/frontend/dist
+mlruns
